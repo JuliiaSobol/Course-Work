@@ -1,25 +1,27 @@
-public class MSet<E> {
+import java.util.Collection;
+import java.util.HashMap;
+
+public class Set<E> {
 
 	private HashMap<E, Object> map = new HashMap<E, Object>();
-	// Dummy value to associate with an Object in the backing Map
+	
 	private static final Object PRESENT = new Object();
 
-	public Collection<E> toCollection(){
-		return map.keySet(); 
+	public Collection<E> toCollection() {
+		return map.keySet();
 	}
-	
-	public void output(){
-		for(E e: toCollection())
+
+	public void output() {
+		for (E e : toCollection())
 			System.out.println(e);
 	}
-	
-	
+
 	public boolean empty() {
 		return map.isEmpty();
 	}
-	
+
 	public boolean include(E e) {
-		return map.put(e, PRESENT) == PRESENT;		
+		return map.put(e, PRESENT) == PRESENT;
 	}
 
 	public int size() {
@@ -34,25 +36,40 @@ public class MSet<E> {
 		return map.containsKey(o);
 	}
 
-	public boolean union(MSet<? extends E> ms) {
+	public boolean union(Set<? extends E> ms) {
 		boolean modified = false;
-		for (E e : ms.toCollection()){
+		for (E e : ms.toCollection()) {
 			if (include(e))
 				modified = true;
 		}
+
 		return modified;
 	}
 
-	 public MSet<E> section(MSet<E> ms) {
-	 MSet<E> temp = new MSet<E>();
-	  for(E el: ms.toCollection()){
-		  for(E el2: toCollection()){
-			  if(el == el2)
-				  temp.include(el);
-		  }
-	  }
-	  return temp;
-	 }
+	public Set<E> section(Set<E> ms) {
+		Set<E> temp = new Set<E>();
+		for (E el : toCollection()) {
+			if (ms.find(el)) {
+				temp.include(el);
+			}
+		}
+		temp.output();
+		return temp;
+	}
+	
+	
+	public Set<E> substract(Set<E> ms) {
+		Set<E> temp = new Set<E>();
+		for (E el : toCollection()) {
+			if (ms.find(el)) {
+				temp.include(el);
+			}
+		}
+		temp.output();
+		return temp;
+	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -70,7 +87,7 @@ public class MSet<E> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MSet other = (MSet) obj;
+		Set other = (Set) obj;
 		if (map == null) {
 			if (other.map != null)
 				return false;
