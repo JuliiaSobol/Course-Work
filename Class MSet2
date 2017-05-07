@@ -1,0 +1,107 @@
+import java.util.Collection;
+import java.util.HashMap;
+
+public class Set<E> {
+
+	private HashMap<E, Object> map = new HashMap<E, Object>();
+	private static final Object PRESENT = new Object();
+
+	public Collection<E> toCollection(){
+		return map.keySet(); 
+	}
+	
+	public void output(){
+		for(E e: toCollection())
+			System.out.println(e);
+	}
+	
+	
+	public boolean empty() {
+		return map.isEmpty();
+	}
+	
+	public boolean include(E e) {
+		return map.put(e, PRESENT) == PRESENT;		
+	}
+
+	public int size() {
+		return map.size();
+	}
+
+	public boolean exclude(Object o) {
+		return map.remove(o) == PRESENT;
+	}
+
+	public boolean find(Object o) {
+		return map.containsKey(o);
+	}
+
+	public boolean union(Set<? extends E> ms) {
+		boolean modified = false;
+		for (E e : ms.toCollection()){
+			if (include(e))
+				modified = true;
+		}
+		return modified;
+	}
+
+	public Set<E> substract(Set<E>ms) { 
+		Set<E> temp = new Set<E>(); 
+		for (E el : toCollection()) { 
+		if (ms.find(el)) { 
+			
+		} 
+		else { 
+		temp.include(el); 
+		} 
+
+		} 
+		temp.output(); 
+		return temp; 
+		}
+	
+	public Set<E> section(Set<E> ms) {
+		Set<E> temp = new Set<E>();
+		for (E el : toCollection()) {
+			if (ms.find(el)) {
+				temp.include(el);
+			}
+		}
+		temp.output();
+		return temp;
+	}
+	 
+	public void swap(Set<E> other) { 
+		HashMap<E, Object> container = null; 
+		this.map = container; 
+		other.map = this.map; 
+		container = other.map; 
+		}
+	 
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((map == null) ? 0 : map.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Set other = (Set) obj;
+		if (map == null) {
+			if (other.map != null)
+				return false;
+		} else if (!map.equals(other.map))
+			return false;
+		return true;
+	}
+
+}
