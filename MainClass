@@ -19,6 +19,13 @@ public class MainClass {
 		ms1.include("7");
 		ms1.include("6");
 		
+		System.out.println(ms.equals(ms1));
+		System.out.println(ms.union(ms1));
+		ms.section(ms1);
+		ms.substract(ms1);
+		
+		System.out.println(ms.size());
+       		System.out.println(ms1.size());
 	}
 
 }
