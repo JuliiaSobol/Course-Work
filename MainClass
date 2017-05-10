@@ -1,31 +1,31 @@
+
 public class MainClass {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		MSet<String> ms = new MSet<String>();
-		MSet<String> ms1 = new MSet<String>();
 		
-		ms.include("1");
-		ms.include("2");
-		ms.include("7");
-		ms.include("4");
-		ms.include("44");
+		Set <String> firstSet = new Set<String>();
+		Set<String> secondSet = new Set<String>();
 		
-		ms1.include("1");
-		ms1.include("2");
-		ms1.include("3");
-		ms1.include("33");
-		ms1.include("41");
-		ms1.include("7");
-		ms1.include("6");
+		firstSet.include("1");
+		firstSet.include("2");
+		firstSet.include("7");
+		firstSet.include("4");
+		firstSet.include("44");
 		
-		System.out.println(ms.equals(ms1));
-		System.out.println(ms.union(ms1));
-		ms.section(ms1);
-		ms.substract(ms1);
+		secondSet.include("1");
+		secondSet.include("2");
+		secondSet.include("3");
+		secondSet.include("33");
+		secondSet.include("41");
+		secondSet.include("7");
+		secondSet.include("6");
 		
-		System.out.println(ms.size());
-       		System.out.println(ms1.size());
+       
+		
+        
+        
+		
+
 	}
 
 }
